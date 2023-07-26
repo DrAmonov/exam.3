@@ -1,0 +1,99 @@
+GET 
+        localhost:PORT/categories
+                                dasturlash
+                                dizayin
+                                marketing
+                                ...
+                                
+                localhost:PORT/categories/dasturlash 
+                                                python
+                                                java
+                                                nodejs
+                                                dotnet
+                                                go
+                                                ...
+
+                localhost:PORT/categories/dizayin 
+                                                logo
+                                                grafika
+                                                shrift
+                                                muqova
+                                                ...
+
+                localhost:PORT/categories/marketing  
+                                                smm
+                                                brand
+                                                blog
+                                                media
+                                                ...
+
+                        localhost:PORT/categories/dasturlash/python
+                                                                video1 
+                                                                video2    
+                                                                video3
+                                                                ...    
+
+                        localhost:PORT/categories/dasturlash/python/1
+                                                                        <-- video1 & comments & user
+                                                                        
+                        localhost:PORT/categories/dizayin/logo
+                                                                video4    
+                                                                video5   
+                                                                video6
+                                                                ... 
+
+                        localhost:PORT/categories/dizayin/logo/5
+                                                                        <-- video5 & comments & user
+
+
+POST
+        localhost:PORT/register
+                username, login, password       <-- token       1 day
+ 
+        localhost:PORT/login
+                login, password                 <-- token 
+
+        localhost:PORT/videos           + token               
+
+                   categoriya ^ , sap_categoriya ^ , file , nomi               <-- added video +  id
+                   dasturlash           python                                
+                   dizayin              java                                
+                   marketing            nodejs                                  
+                                        .net
+                                        go
+
+
+
+        localhost:PORT/comments          + token                               < -- added comment  + id
+                videoId,  comment  
+
+
+PUT
+        localhost:PORT/video/5         +   token
+
+                categoriya ^ | sap_categoriya ^ | file | nomi                   <--    update video
+                   dasturlash           python                                
+                   dizayin              java                                
+                   marketing            nodejs                                  
+                                        .net
+                                        go
+
+        localhost:PORT/comments/3          + token                              < -- update comment  + id
+                comment  
+
+
+DELETE                 (faqat o'zi yuklaganlarini)
+        localhost:PORT/video/12                     + token
+        localhost:PORT/comment/55                   + token    
+
+
+
+
+categories      sap_categories           videos                    users          comments      
+                
+cat_id           sap_id                   video_id                 user_id        coment_id      
+cat_name         sap_name                 user_id                  username       user_id        
+                 cat_ref_id               title                    login          video_id       
+                                          date                     password       comment  
+                                          sap_category_id
+                                          link 
