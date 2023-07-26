@@ -103,6 +103,7 @@ app.get('/categories', async (req, res) => {
 app.post('/categories/:categoryId/sap_categories', async (req, res) => {
 	try {
 		const { categoryId } = req.params;
+		// postmanda id ikki nuqtasiz yoziladi
 		const { sap_name } = req.body;
 
 		const categoryQuery = 'SELECT * FROM categories WHERE id = $1';
