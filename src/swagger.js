@@ -41,7 +41,7 @@ const swaggerOptions = {
 			},
 		},
 	},
-	apis: [process.cwd() + '/docs/index.yaml'],
+	apis: [process.cwd + '/docs/index.yaml'],
 };
 
 const swaggerSpec = swaggerJsDoc(swaggerOptions);
