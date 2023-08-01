@@ -1,0 +1,268 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Your API Title
+  description: Your API Description
+
+schemes:
+  - http
+  - https
+
+paths:
+  /register:
+    post:
+      summary: Register a new user
+      parameters:
+        - name: user
+          in: body
+          description: User object
+          required: true
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: Successfully registered
+        500:
+          description: Something went wrong
+
+  /login:
+    post:
+      summary: Login with username and password
+      parameters:
+        - name: credentials
+          in: body
+          description: User credentials
+          required: true
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: Successfully logged in
+        401:
+          description: Invalid credentials
+        500:
+          description: Something went wrong
+
+  /categories:
+    post:
+      summary: Create a new category
+      parameters:
+        - name: category
+          in: body
+          description: Category object
+          required: true
+          schema:
+            type: object
+            properties:
+              cat_name:
+                type: string
+      responses:
+        200:
+          description: Successfully created a new category
+        500:
+          description: Something went wrong
+
+    get:
+      summary: Get all categories
+      responses:
+        200:
+          description: Successfully retrieved categories
+        500:
+          description: Something went wrong
+
+  /categories/{categoryId}/sap_categories:
+    post:
+      summary: Create a new sap_category under a specific category
+      parameters:
+        - name: categoryId
+          in: path
+          description: Category ID
+          required: true
+          type: integer
+        - name: sap_category
+          in: body
+          description: Sap_category object
+          required: true
+          schema:
+            type: object
+            properties:
+              sap_name:
+                type: string
+      responses:
+        200:
+          description: Successfully created a new sap_category
+        400:
+          description: Invalid categoryId
+        404:
+          description: Category not found
+        500:
+          description: Something went wrong
+
+    get:
+      summary: Get all sap_categories under a specific category
+      parameters:
+        - name: categoryId
+          in: path
+          description: Category ID
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Successfully retrieved sap_categories
+        500:
+          description: Something went wrong
+
+  /sections/{sectionId}/videos:
+    post:
+      summary: Create a new video under a specific sap_category
+      parameters:
+        - name: sectionId
+          in: path
+          description: Sap_category ID
+          required: true
+          type: integer
+        - name: video
+          in: body
+          description: Video object
+          required: true
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+              sap_category_id:
+                type: integer
+      responses:
+        200:
+          description: Successfully created a new video
+        400:
+          description: Invalid sap_category_id
+        404:
+          description: Sap_category not found
+        500:
+          description: Something went wrong
+
+    get:
+      summary: Get all videos under a specific sap_category
+      parameters:
+        - name: sectionId
+          in: path
+          description: Sap_category ID
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Successfully retrieved videos
+        500:
+          description: Something went wrong
+
+  /videos/{videoId}/comments:
+    post:
+      summary: Post a comment for a specific video
+      parameters:
+        - name: videoId
+          in: path
+          description: Video ID
+          required: true
+          type: integer
+        - name: comment
+          in: body
+          description: Comment object
+          required: true
+          schema:
+            type: object
+            properties:
+              content:
+                type: string
+      responses:
+        200:
+          description: Successfully posted a comment
+        404:
+          description: Video not found
+        500:
+          description: Something went wrong
+
+    get:
+      summary: Get all comments for a specific video
+      parameters:
+        - name: videoId
+          in: path
+          description: Video ID
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Successfully retrieved comments
+        500:
+          description: Something went wrong
+
+# ... other paths ...
+
+definitions:
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+      username:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+
+  Category:
+    type: object
+    properties:
+      id:
+        type: integer
+      cat_name:
+        type: string
+
+  SapCategory:
+    type: object
+    properties:
+      id:
+        type: integer
+      sap_name:
+        type: string
+      cat_ref_id:
+        type: integer
+
+  Video:
+    type: object
+    properties:
+      id:
+        type: integer
+      user_id:
+        type: integer
+      title:
+        type: string
+      sap_category_id:
+        type: integer
+      link:
+        type: string
+
+  Comment:
+    type: object
+    properties:
+      id:
+        type: integer
+      user_id:
+        type: integer
+      video_id:
+        type: integer
+      content:
+        type: string

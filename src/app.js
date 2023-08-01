@@ -4,6 +4,7 @@ const { Pool } = require('pg');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const fileUpload = require('express-fileupload');
+const { swaggerUi, swaggerSpec } = require('./swagger');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -18,6 +19,7 @@ const pool = new Pool({
 
 app.use(express.json());
 app.use(fileUpload());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 function authenticateToken(req, res, next) {
 	const authHeader = req.headers['authorization'];
